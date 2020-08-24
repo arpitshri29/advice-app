@@ -9,13 +9,34 @@ class App extends Component {
     };
 
     componentDidMount() {
-        console.log('Component did mount');
+        this.fetchAdvice();
     }
 
+    fetchAdvice = () => {
+      axios.get('https://api.adviceslip.com/advice')
+          .then((response) => {
+              const {advice} = response.data.slip; // Destructuring
+
+              this.setState({ advice });
+              console.log('clicked: ',advice);
+
+          })
+          .catch((error) => {
+              console.log(error);
+          })
+    };
+
     render() {
+
+        const {advice} = this.state; // Destructuring
+
         return (
-            <div>
-                App
+            <div className='main'>
+                <div className="card">
+                    <h1 className="advice">{ advice }</h1>
+                </div>
+                <button className="button" onClick={this.fetchAdvice}><span>Give me an advice!!</span></button>
+                <span className='name'>Arpit Shrivastava</span>
             </div>
         );
     }
