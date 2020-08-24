@@ -18,7 +18,6 @@ class App extends Component {
               const {advice} = response.data.slip; // Destructuring
 
               this.setState({ advice });
-              console.log('clicked: ',advice);
 
           })
           .catch((error) => {
